@@ -1,63 +1,52 @@
-﻿//#include "stdafx.h"
+//#include "stdafx.h"
 #include <iostream>
-#include "\Users\Артур\source\repos\lab2\Buth_Lemn.h"
+#include "C:\Users\Артур\source\repos\oop2021\lab2\Buth_Lemn.h"
 
-int _tmain(int argc, _TCHAR* argv[])
-{
-	Prog2::Circle c(2, 1, 2);
-	Prog2::Point p(3);
+using namespace std;
+using namespace Prog2;
+
+int _tmain(int argc, _TCHAR* argv[]) {
+	Buth_Lemn l(3, 1);
 	int fl1 = 1;
 	double r;
 	char* s = NULL;
 	while (fl1) {
-		std::cout << "Your circle is:" << std::endl;
-		s = c.frm();
-		std::cout << s << std::endl;
+		cout << "Your lemniskata is:" << endl;
+		s = l.frm();
+		cout << s << endl;
 		delete[] s;
-		std::cout << "area: " << c.area() << std::endl;
-		std::cout << "perimeter: " << c.perimeter() << std::endl;
-		std::cout << "distance: " << c.distance() << std::endl;
+		cout << "area: " << l.area() << endl;
+		cout << "type: " << l.type() << endl;
+		cout << "parametrs: " << l.parametrs() << endl;
+		cout << "distance: " << l.distance() << endl;
 		int fl2 = 1;
 		while (fl2) {
-			std::cout << "Enter x for calculate value y(x) or precc ctrl+Z to quit:" <<
-				std::endl;
+			cout << "Enter x for calculate value y(x) or precc ctrl+Z to quit:" << endl;
 			double x;
-			Prog2::Point y;
-			std::cin >> x;
-			fl2 = std::cin.good();
+			cin >> x;
+			fl2 = cin.good();
 			if (!fl2)
 				continue;
 			try {
 				y = c.f(x);
-				std::cout << "y1 = " << y.x << ", y2 = " << y.y << std::endl;
+				cout << "y1 = " << y.x << ", y2 = " << y.y << endl;
 			}
-
-			Shustova L.I.
-
-				KC& T
-
-				KC& T
-
-				Shustova L.I.
-
-				5
-
-				catch (std::exception& ex)
+				catch (exception& ex)
 			{
-				std::cout << ex.what() << std::endl;
+				cout << ex.what() << endl;
 			}
 		}
-		std::cin.clear();
-		std::cout << "Enter new x, y and r to continue or press ctrl+Z to quit:" << std::endl;
-		std::cin >> p.x >> p.y >> r;
-		if (std::cin.good()) {
+		cin.clear();
+		cout << "Enter new x, y and r to continue or press ctrl+Z to quit:" << endl;
+		cin >> p.x >> p.y >> r;
+		if (cin.good()) {
 			c.setP(p);
 			try {
 				c.setR(r);
 			}
-			catch (std::exception& ex)
+			catch (exception& ex)
 			{
-				std::cout << ex.what() << std::endl;
+				cout << ex.what() << endl;
 			}
 		}
 		else

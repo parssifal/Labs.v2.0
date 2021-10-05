@@ -10,7 +10,6 @@ namespace data {
 
 	typedef struct matrix {
 		val** data;
-		val** cur;
 		unsigned int size;
 	}matr;
 }
@@ -28,4 +27,4 @@ const int get_val(const char* k);
 void clear_m(matrix* m);
 
 matrix* modif_m(matrix* m);
-#endif //func_jh
+#endif //func_h
