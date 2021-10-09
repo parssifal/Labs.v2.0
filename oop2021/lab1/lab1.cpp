@@ -17,7 +17,7 @@ int info() {
 }
 
 int main() {
-	//int n, m;
+	int n, m;
 	n = get_val("Enter n: ");
 	m = get_val("Enter m: ");
 	matrix* M = init_m(n, m, 1);
