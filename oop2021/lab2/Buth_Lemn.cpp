@@ -1,28 +1,35 @@
-//#include "stdafx.h"
-#include <strstream>
+﻿#include <strstream>
 #include <stdio.h>
 #include <string.h>
+#include <iostream>
+#include <cmath>
 #include "Buth_Lemn.h"
 
+using namespace std;
+
 namespace Prog2 {
-		double type(double c, double m) const {       //Определяет
+		double type(double c, double m)  {       //Определяет
 			int i;                          //тип кривой
 			if (c > 2 * m * m) return i = 0;//elleptic
 			if (c < 2 * m * m) return i = 1;//hyperbolic
 		}
 
-		double parametrs(double c, double m) const {          //Определяет
+		double parametrs(double c, double m) {          //Определяет
 			if (type(c, m) == 0) {//e               //параметры
 				double a2 = 2 * m * m + c;      //для полярного
-				double b2 = 2 * m * m + c;      //уравнения
+				double b2 = 2 * m * m + c;
+				cout << "a = " << a2 << endl;   //уравнения
+				cout << "b = " << b2 << endl;
 			}                                       //зависящие
 			else if (type(c, m) == 1) {//h          //от типа
-				double a2 = 2 * m * m + c;      //кривой
+				double a22 = 2 * m * m + c;      //кривой
 				double b22 = 2 * m * m - c;
+				cout << "a = " << a22 << endl;
+				cout << "b = " << b22 << endl;
 			}
 		}
 
-		double area(double c, double m) const {//Вычисляет площадь
+		double area(double c, double m) {//Вычисляет площадь
 			if (type(c, m) == 0) {
 				return 3.14159 * ((2 * m * m + c) + (2 * m * m + c)) / 2;
 			}
@@ -30,17 +37,11 @@ namespace Prog2 {
 				return ((2 * m * m + c) - (2 * m * m - c)) * (atan(sqrt((2 * m * m + c) / (2 * m * m - c)))) / 2 + (sqrt((2 * m * m + c) * (2 * m * m - c))) / 2;
 			}
 		}
-		Buth_Lemn& Buth_Lemn::setCM(double c0, double m0) {
-			if (c0 == 0)
-				throw exception("invalid value, degeneration into bernoulli lemniscate");
-			c = c0;
-			return *this;
-			if (c0 = 2 * m0 * m0)
-				throw exception("invalid values, degeneration into two circles");
-			c = c0;
-			m = m0;
-			return *this;
+		
+		Buth_Lemn& Buth_Lemn::setCM(double c, double m) {
+
 		}
+
 		char* Buth_Lemn::frm(int type) const { //формула лемнискаты Бута
 			int i = type;
 			if (i == 0) {
@@ -76,5 +77,118 @@ namespace Prog2 {
 				return s2;
 			}
 		}
-	}
 
+		bool correct_get_int(int& a) noexcept {
+			cin >> a;
+			if (!cin.good()) {
+				cin.clear();
+				cin.ignore();
+				return false;
+			}
+			return true;
+		}
+
+		bool correct_get_double(double& a) noexcept {
+			cin >> a;
+			if (!cin.good()) {
+				cin.clear();
+				cin.ignore();
+				return false;
+			}
+			return true;
+		}
+
+		int get_int() noexcept {
+			int num;
+			while (true) {
+				if (correct_get_int(num))
+					break;
+				cout << "Wrong number" << endl;
+			}
+			return num;
+		}
+
+		double get_double() noexcept {
+			double num;
+			while (true) {
+				if (correct_get_double(num))
+					break;
+				cout << "Wrong number" << endl;
+			}
+			return num;
+		}
+
+		int create(Buth_Lemn& l) {
+			double c, m;
+
+			cout << "Enter c" << endl;
+			c = get_double();
+
+			cout << "Enter m" << endl;
+			m = get_double();
+
+			try {
+				l.setC(c);
+			}
+			catch (const char* msg) {
+				cerr << msg << endl;
+				return 1;
+			}
+
+			try {
+				l.setM(m);
+			}
+			catch (const char* msg2) {
+				cerr << msg2 << endl;
+				return 1;
+			}
+
+			return 0;
+		}
+
+		int change_parameters(Buth_Lemn& l) {
+			int h;
+			double c, m;
+			do {
+				cout << "0. Exit" << endl;
+				cout << "1. Change c" << endl;
+				cout << "2. Change m" << endl;
+				h = get_int();
+				switch (h) {
+				case 0:
+					cout << "***Exit***" << endl;
+					break;
+
+				case 1:
+					cout << "***Change c***" << endl;
+					c = get_double();
+					try {
+						l.setC(c);
+					}
+					catch (const char* msg) {
+						cerr << msg << endl;
+						return 1;
+					}
+					break;
+
+				case 2:
+					cout << "***Change m***" << endl;
+					m = get_double();
+					try {
+						l.setM(m);
+					}
+					catch (const char* msg) {
+						cerr << msg << endl;
+						return 1;
+					}
+					break;
+
+				default:
+					cout << "You are wrong! Try again" << endl;
+					break;
+				}
+			} while (h != 0);
+			return 0;
+		}
+
+	}

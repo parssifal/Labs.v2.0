@@ -1,4 +1,4 @@
-﻿#include <iostream>
+#include <iostream>
 //#include <cstdlib>
 #include <crtdbg.h>
 //#define _CRTDBG_MAP_ALLOC
@@ -18,20 +18,20 @@ int info() {
 
 int main() {
 	int n, m;
-	n = get_val("Enter n:");
-	m = get_val("Enter m ");
-	matrix* M = init_matrix(n, m, 1);
-	read_m(M, m);
+	n = get_val("Enter n: ");
+	m = get_val("Enter m: ");
+	matrix* M = init_m(n, m, 1);
+	read_zm(M, m);
 	matrix* nm = modif_m(M);
 	int h;
 	while ((h = info())) {
 		switch (h) {
-		case 1: read_m(M, m); break;
-		case 2: read_rm(M, 1); break;
-		case 3: read_rm(nm, 0); break;
+		case 1: read_zm(M, m); break;
+		case 2: read_m(M, 1); break;
+		case 3: read_m(nm, 0); break;
 		case 4:
-			clear_m(M);
-			clear_m(nm);
+			del_m(M);
+			del_m(nm);
 			cout << "End of programm.\n";
 			return 0;
 		}
