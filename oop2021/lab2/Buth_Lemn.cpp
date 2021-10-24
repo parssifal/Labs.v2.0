@@ -1,194 +1,206 @@
-ï»¿#include <strstream>
+#include <strstream>
 #include <stdio.h>
 #include <string.h>
 #include <iostream>
 #include <cmath>
-#include "Buth_Lemn.h"
+#include "C:\Users\Àðòóð\source\repos\lab2\Buth_Lemn.h"
 
 using namespace std;
 
 namespace Prog2 {
-		double type(double c, double m)  {       //ÐžÐ¿Ñ€ÐµÐ´ÐµÐ»ÑÐµÑ‚
-			int i;                          //Ñ‚Ð¸Ð¿ ÐºÑ€Ð¸Ð²Ð¾Ð¹
-			if (c > 2 * m * m) return i = 0;//elleptic
-			if (c < 2 * m * m) return i = 1;//hyperbolic
-		}
-
-		double parametrs(double c, double m) {          //ÐžÐ¿Ñ€ÐµÐ´ÐµÐ»ÑÐµÑ‚
-			if (type(c, m) == 0) {//e               //Ð¿Ð°Ñ€Ð°Ð¼ÐµÑ‚Ñ€Ñ‹
-				double a2 = 2 * m * m + c;      //Ð´Ð»Ñ Ð¿Ð¾Ð»ÑÑ€Ð½Ð¾Ð³Ð¾
-				double b2 = 2 * m * m + c;
-				cout << "a = " << a2 << endl;   //ÑƒÑ€Ð°Ð²Ð½ÐµÐ½Ð¸Ñ
-				cout << "b = " << b2 << endl;
-			}                                       //Ð·Ð°Ð²Ð¸ÑÑÑ‰Ð¸Ðµ
-			else if (type(c, m) == 1) {//h          //Ð¾Ñ‚ Ñ‚Ð¸Ð¿Ð°
-				double a22 = 2 * m * m + c;      //ÐºÑ€Ð¸Ð²Ð¾Ð¹
-				double b22 = 2 * m * m - c;
-				cout << "a = " << a22 << endl;
-				cout << "b = " << b22 << endl;
-			}
-		}
-
-		double area(double c, double m) {//Ð’Ñ‹Ñ‡Ð¸ÑÐ»ÑÐµÑ‚ Ð¿Ð»Ð¾Ñ‰Ð°Ð´ÑŒ
-			if (type(c, m) == 0) {
-				return 3.14159 * ((2 * m * m + c) + (2 * m * m + c)) / 2;
-			}
-			else if (type(c, m) == 1) {
-				return ((2 * m * m + c) - (2 * m * m - c)) * (atan(sqrt((2 * m * m + c) / (2 * m * m - c)))) / 2 + (sqrt((2 * m * m + c) * (2 * m * m - c))) / 2;
-			}
-		}
-		
-		Buth_Lemn& Buth_Lemn::setCM(double c, double m) {
-
-		}
-
-		char* Buth_Lemn::frm(int type) const { //Ñ„Ð¾Ñ€Ð¼ÑƒÐ»Ð° Ð»ÐµÐ¼Ð½Ð¸ÑÐºÐ°Ñ‚Ñ‹ Ð‘ÑƒÑ‚Ð°
-			int i = type;
-			if (i == 0) {
-				char* s1 = "(x^2 + y^2)^2 = (2* ^2 + )^2 * x^2 + ( - 2* ^2) * y^2\n";
-				int l1 = strlen(s1) + 1;
-				size_t Size = 20;
-				char num[20];
-				sprintf_s(num, 20, "%.2f", c);
-				l1 += strlen(num);
-				sprintf_s(num, 20, "%.2f", m);
-				l1 += strlen(num);
-				char* s1 = new char[l1];
-				sprintf_s(s1, l1, "(x^2 + y^2)^2 = (2* ^2 + %.2f)^2 * x^2 + (%.2f - 2* ^2) * y^2\n", c, c);
-				int k = strlen(s1);
-				sprintf_s(s1 + k, l1 - k, "(x^2 + y^2)^2 = (2*%.2f^2 + )^2 * x^2 + ( - 2*%.2f^2) * y^2\n", m, m);
-				k = strlen(s1);
-				return s1;
-			}
-			else if (i == 1) {
-				char* s2 = "(x^2 + y^2)^2 = (2* ^2 + )^2 * x^2 - (2* ^2 - ) * y^2\n";
-				int l2 = strlen(s2) + 1;
-				size_t Size = 20;
-				char num[20];
-				sprintf_s(num, 20, "%.2f", c);
-				l2 += strlen(num);
-				sprintf_s(num, 20, "%.2f", m);
-				l2 += strlen(num);
-				char* s2 = new char[l2];
-				sprintf_s(s2, l2, "(x^2 + y^2) ^ 2 = (2* ^2 + %.2f)^ 2 * x^2 + (% .2f - 2 * ^2) * y ^ 2\n", c, c);
-				int k = strlen(s2);
-				sprintf_s(s2 + k, l2 - k, "(x^2 + y^2)^2 = (2*%.2f^2 + )^2 * x^2 + ( - 2*%.2f^2) * y^2\n", m, m);
-				k = strlen(s2);
-				return s2;
-			}
-		}
-
-		bool correct_get_int(int& a) noexcept {
-			cin >> a;
-			if (!cin.good()) {
-				cin.clear();
-				cin.ignore();
-				return false;
-			}
-			return true;
-		}
-
-		bool correct_get_double(double& a) noexcept {
-			cin >> a;
-			if (!cin.good()) {
-				cin.clear();
-				cin.ignore();
-				return false;
-			}
-			return true;
-		}
-
-		int get_int() noexcept {
-			int num;
-			while (true) {
-				if (correct_get_int(num))
-					break;
-				cout << "Wrong number" << endl;
-			}
-			return num;
-		}
-
-		double get_double() noexcept {
-			double num;
-			while (true) {
-				if (correct_get_double(num))
-					break;
-				cout << "Wrong number" << endl;
-			}
-			return num;
-		}
-
-		int create(Buth_Lemn& l) {
-			double c, m;
-
-			cout << "Enter c" << endl;
-			c = get_double();
-
-			cout << "Enter m" << endl;
-			m = get_double();
-
-			try {
-				l.setC(c);
-			}
-			catch (const char* msg) {
-				cerr << msg << endl;
-				return 1;
-			}
-
-			try {
-				l.setM(m);
-			}
-			catch (const char* msg2) {
-				cerr << msg2 << endl;
-				return 1;
-			}
-
-			return 0;
-		}
-
-		int change_parameters(Buth_Lemn& l) {
-			int h;
-			double c, m;
-			do {
-				cout << "0. Exit" << endl;
-				cout << "1. Change c" << endl;
-				cout << "2. Change m" << endl;
-				h = get_int();
-				switch (h) {
-				case 0:
-					cout << "***Exit***" << endl;
-					break;
-
-				case 1:
-					cout << "***Change c***" << endl;
-					c = get_double();
-					try {
-						l.setC(c);
-					}
-					catch (const char* msg) {
-						cerr << msg << endl;
-						return 1;
-					}
-					break;
-
-				case 2:
-					cout << "***Change m***" << endl;
-					m = get_double();
-					try {
-						l.setM(m);
-					}
-					catch (const char* msg) {
-						cerr << msg << endl;
-						return 1;
-					}
-					break;
-
-				default:
-					cout << "You are wrong! Try again" << endl;
-					break;
-				}
-			} while (h != 0);
-			return 0;
-		}
-
+	double type(double c, double m) {       //Îïðåäåëÿåò
+		int i;                          //òèï êðèâîé
+		if (c > 2 * m * m) return i = 0;//elleptic
+		if (c < 2 * m * m) return i = 1;//hyperbolic
 	}
+
+	double parametrs(double c, double m) {          //Îïðåäåëÿåò
+		if (type(c, m) == 0) {//e               //ïàðàìåòðû
+			double a2 = 2 * m * m + c;      //äëÿ ïîëÿðíîãî
+			double b2 = 2 * m * m + c;
+			cout << "a = " << a2 << endl;   //óðàâíåíèÿ
+			cout << "b = " << b2 << endl;
+		}                                       //çàâèñÿùèå
+		else if (type(c, m) == 1) {//h          //îò òèïà
+			double a22 = 2 * m * m + c;      //êðèâîé
+			double b22 = 2 * m * m - c;
+			cout << "a = " << a22 << endl;
+			cout << "b = " << b22 << endl;
+		}
+	}
+
+	double area(double c, double m) {//Âû÷èñëÿåò ïëîùàäü
+		if (type(c, m) == 0) {
+			return 3.14159 * ((2 * m * m + c) + (2 * m * m + c)) / 2;
+		}
+		else if (type(c, m) == 1) {
+			return ((2 * m * m + c) - (2 * m * m - c)) * (atan(sqrt((2 * m * m + c) / (2 * m * m - c)))) / 2 + (sqrt((2 * m * m + c) * (2 * m * m - c))) / 2;
+		}
+	}
+
+	double distance(double c, double m, double phi) {
+		if (type(c, m) == 0) {
+			double a2 = 2 * m * m + c;
+			double b2 = 2 * m * m + c;
+			double p = pow(a2 * cos(phi), 2) + pow(b2 * sin(phi), 2);
+			return p;
+		}
+		else if (type(c, m) == 1) {
+			double a22 = 2 * m * m + c;
+			double b22 = 2 * m * m - c;
+			double p = pow(a22 * cos(phi), 2) + pow(b22 * sin(phi), 2);
+			p = sqrt(p);
+			return p;
+		}
+	}
+
+	char* Prog2::Buth_Lemn::frm(int type) const { //ôîðìóëà ëåìíèñêàòû Áóòà
+		int i = type;
+		if (i == 0) {
+			const char* s1 = "(x^2 + y^2)^2 = (2* ^2 + )^2 * x^2 + ( - 2* ^2) * y^2\n";
+			int l1 = strlen(s1) + 1;
+			size_t Size = 20;
+			char num[20];
+			sprintf_s(num, 20, "%.2f", c);
+			l1 += strlen(num);
+			sprintf_s(num, 20, "%.2f", m);
+			l1 += strlen(num);
+			char* sr1 = new char[l1];
+			sprintf_s(sr1, l1, "(x^2 + y^2)^2 = (2* ^2 + %.2f)^2 * x^2 + (%.2f - 2* ^2) * y^2\n", c, c);
+			int k = strlen(sr1);
+			sprintf_s(sr1 + k, l1 - k, "(x^2 + y^2)^2 = (2*%.2f^2 + )^2 * x^2 + ( - 2*%.2f^2) * y^2\n", m, m);
+			k = strlen(sr1);
+			return sr1;
+		}
+		else if (i == 1) {
+			const char* s2 = "(x^2 + y^2)^2 = (2* ^2 + )^2 * x^2 - (2* ^2 - ) * y^2\n";
+			int l2 = strlen(s2) + 1;
+			size_t Size = 20;
+			char num[20];
+			sprintf_s(num, 20, "%.2f", c);
+			l2 += strlen(num);
+			sprintf_s(num, 20, "%.2f", m);
+			l2 += strlen(num);
+			char* sr2 = new char[l2];
+			sprintf_s(sr2, l2, "(x^2 + y^2) ^ 2 = (2* ^2 + %.2f)^ 2 * x^2 + (% .2f - 2 * ^2) * y ^ 2\n", c, c);
+			int k = strlen(sr2);
+			sprintf_s(sr2 + k, l2 - k, "(x^2 + y^2)^2 = (2*%.2f^2 + )^2 * x^2 + ( - 2*%.2f^2) * y^2\n", m, m);
+			k = strlen(sr2);
+			return sr2;
+		}
+	}
+
+	bool correct_get_int(int& a) noexcept {
+		cin >> a;
+		if (!cin.good()) {
+			cin.clear();
+			cin.ignore();
+			return false;
+		}
+		return true;
+	}
+
+	bool correct_get_double(double& a) noexcept {
+		cin >> a;
+		if (!cin.good()) {
+			cin.clear();
+			cin.ignore();
+			return false;
+		}
+		return true;
+	}
+
+	int get_int() noexcept {
+		int num;
+		while (true) {
+			if (correct_get_int(num))
+				break;
+			cout << "Wrong number" << endl;
+		}
+		return num;
+	}
+
+	double get_double() noexcept {
+		double num;
+		while (true) {
+			if (correct_get_double(num))
+				break;
+			cout << "Wrong number" << endl;
+		}
+		return num;
+	}
+
+	int create(Buth_Lemn& l) {
+		double c, m;
+
+		cout << "Enter c" << endl;
+		c = get_double();
+
+		cout << "Enter m" << endl;
+		m = get_double();
+
+		try {
+			l.setC(c);
+		}
+		catch (const char* msg) {
+			cerr << msg << endl;
+			return 1;
+		}
+
+		try {
+			l.setM(m);
+		}
+		catch (const char* msg2) {
+			cerr << msg2 << endl;
+			return 1;
+		}
+
+		return 0;
+	}
+
+	int change_parameters(Buth_Lemn& l) {
+		int h;
+		double c, m;
+		do {
+			cout << "0. Exit" << endl;
+			cout << "1. Change c" << endl;
+			cout << "2. Change m" << endl;
+			h = get_int();
+			switch (h) {
+			case 0:
+				cout << "***Exit***" << endl;
+				break;
+
+			case 1:
+				cout << "***Change c***" << endl;
+				c = get_double();
+				try {
+					l.setC(c);
+				}
+				catch (const char* msg) {
+					cerr << msg << endl;
+					return 1;
+				}
+				break;
+
+			case 2:
+				cout << "***Change m***" << endl;
+				m = get_double();
+				try {
+					l.setM(m);
+				}
+				catch (const char* msg) {
+					cerr << msg << endl;
+					return 1;
+				}
+				break;
+
+			default:
+				cout << "You are wrong! Try again" << endl;
+				break;
+			}
+		} while (h != 0);
+		return 0;
+	}
+
+}

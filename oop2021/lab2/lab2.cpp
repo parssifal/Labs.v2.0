@@ -1,5 +1,6 @@
 ﻿#include <iostream>
-#include "Buth_Lemn.h"
+#include "C:\Users\Артур\source\repos\lab2\Buth_Lemn.h"
+#include "C:\Users\Артур\source\repos\lab2\Buth_Lemn.cpp"
 
 using namespace std;
 using namespace Prog2;
@@ -7,8 +8,9 @@ using namespace Prog2;
 int main() {
     int h;
     double t;
+    double c, m;
     Buth_Lemn l;
-    char s = NULL;
+    char *s = NULL;
     do {
         cout << "0. Exit" << endl;
         cout << "1. Create lemniskate" << endl;
@@ -31,18 +33,22 @@ int main() {
             break;
 
         case 2:
-            std::cout << "***Change parameters of lemniskate***" << endl;
+            cout << "***Change parameters of lemniskate***" << endl;
             if (change_parameters(l) == 1) return 1;
             break;
 
         case 3:
             cout << "***Get area of lemniskate***" << endl;
+            c = l.getC();
+            m = l.getM();
             double area = l.area(c, m);
             cout << "Your area is :" << area << endl;
             break;
 
         case 4:
             cout << "***Get type of lemniskate***" << endl;
+            c = l.getC();
+            m = l.getM();
             int type = l.type(c, m);
             if (type == 0) {
                 cout << "Your lemniskate is elleptic." << endl;
@@ -59,13 +65,21 @@ int main() {
 
         case 6:
             cout << "***Get distance***" << endl;
-            double dist = l.distance(l.c, l.m);
-            cout <<"Your distnace is :" << dist << endl;
+            c = l.getC();
+            m = l.getM();
+            double phi;
+            cout << "Enter angle 'phi': " << endl;
+            cin >> phi;
+            double dist = l.distance(c, m, phi);
+            cout << "Your distnace is :" << dist << endl;
             break;
 
         case 7:
             cout << "***Get text form of lemniskate***" << endl;
-            s* = l.frm();
+            c = l.getC();
+            m = l.getM();
+            int type = l.type(c, m);
+            s = l.frm(type);
             cout << "Text version of your lemniskate" << endl;
             cout << s << endl;
             break;
